@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contacts {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav {
+    background-color: rgb(155, 102, 33);
+    color: aliceblue;
+    padding: 1rem;
+}

@@ -1,0 +1,47 @@
+/* Center the counter nicely */
+.counter-div {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #f8fafc;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Count text */
+.count-para {
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Button styling */
+.count-btn {
+  padding: 0.8rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.6rem;
+
+  cursor: pointer;
+}
+
+/* Hover effect */
+.count-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+}
+
+/* Click feedback */
+.count-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}

@@ -1,0 +1,17 @@
+* {
+    padding: 5px;
+    align-items: center;
+    border-collapse: collapse;
+}
+
+table {
+    padding: 5px;
+    align-items: center;
+    border: 2px solid black;
+
+}
+
+.tablerows ,.tablehead ,.tablebody{
+    border: 2px solid black;
+}
+

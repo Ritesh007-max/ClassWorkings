@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "My Chrome Extension",
+  "description": "Unit Conversion Chrome extension",
+  "version": "1.0.0",
+
+  "action": {
+    "default_popup": "index.html"
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="container">
+    
+        <header>
+            <hl>The Great</h1>
+            <h1 id="colorDisplay" class="color-display">RGB Color Guessing Game</h1>
+            <h1 >Guessing Game</h1>
+        </header>
+        
+        <div id="message" class="message">Pick a color!</div>    
+        
+        <div class="streak-section">
+            <div class="streak-box">
+                <h3>Current Streak</h3>
+                <div id="currentStreak" class="streak-number" >0</div>
+            </div>
+        
+            <div class="streak-box">
+                <h3>Best Streak</h3>
+                <div id="bestStreak" class="streak-number">0</div>
+            </div>
+        </div>
+    
+        <div class="controls">
+            <button id="newRoundBtn" class="control-btn">New Round</button>
+            <button id="easyBtn" class="mode-btn" >Easy</button>
+            <button id="hardBtn" class="mode-btn selected">Hard</button>
+            <button id="resetStreakBtn" class="control-btn">Reset Streak</button>
+        </div>
+    
+        <div id="colorBoxContainer" class="color-box-container">
+            <div class="color-box"></div>
+            <div class="color-box"></div>
+            <div class="color-box"></div>
+            <div class="color-box"></div>
+            <div class="color-box"></div>
+            <div class="color-box"></div>
+        </div>
+    </div>
+
+    <div class="lifes">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512" class="heart"><path fill="#9f0606" d="M480.25 156.355c0 161.24-224.25 324.43-224.25 324.43S31.75 317.595 31.75 156.355c0-91.41 70.63-125.13 107.77-125.13c77.65 0 116.48 65.72 116.48 65.72s38.83-65.73 116.48-65.73c37.14.01 107.77 33.72 107.77 125.14"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512" class="heart"><path fill="#9f0606" d="M480.25 156.355c0 161.24-224.25 324.43-224.25 324.43S31.75 317.595 31.75 156.355c0-91.41 70.63-125.13 107.77-125.13c77.65 0 116.48 65.72 116.48 65.72s38.83-65.73 116.48-65.73c37.14.01 107.77 33.72 107.77 125.14"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512" class="heart"><path fill="#9f0606" d="M480.25 156.355c0 161.24-224.25 324.43-224.25 324.43S31.75 317.595 31.75 156.355c0-91.41 70.63-125.13 107.77-125.13c77.65 0 116.48 65.72 116.48 65.72s38.83-65.73 116.48-65.73c37.14.01 107.77 33.72 107.77 125.14"/></svg>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

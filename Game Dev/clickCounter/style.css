@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.container {
+    background-color: aliceblue;
+    width: 40%;
+    height: auto;
+    border-radius: 1rem;
+}
+
+.container h1,
+.container p {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.score-box {
+    background-color: blueviolet;
+    width: 30%;
+    text-align: center;
+    margin: 2rem;
+    height: 5rem;
+    border-radius: 1rem;
+}
+
+.score {
+    font-size: 2rem;
+}
+
+.score-box h2 {
+    margin-top: 1rem;
+}
+
+.score-section {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    color: white
+}
+
+.time-section {
+    background-color: rgb(231, 241, 250);
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    height: 7rem;
+    border-radius: 1rem;
+}
+
+.time-section h2 {
+    padding: 1rem;
+}
+
+.timer {
+    font-size: 2rem;
+}
+
+.click-btn,
+.start-btn,
+.reset-btn {
+    background-color: rgb(157, 161, 164);
+    text-align: center;
+    width: 90%;
+    margin: 2rem 0rem 0rem 2rem;
+    height: 4rem;
+    border: none;
+    border-radius: 1rem;
+    color: white;
+}
+
+.click-btn {
+    height: 6rem;
+}
+
+.btn {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+    gap: 1rem;
+}
+
+.pause-btn,
+.resume-btn {
+    width: 50%;
+    height: 3rem;
+    border-radius: 1rem;
+    margin-bottom: -2rem;
+    border: none;
+    background-color: #0cc2f0;
+}
+
+.resume-btn {
+    background-color: rgb(157, 161, 164);
+    color: white;
+}
+
+.start-btn {
+    background-color: blueviolet;
+}
+
+.reset-btn {
+    background-color: rgb(251, 68, 17);
+}
+
+.status-message {
+    text-align: center;
+    margin: 1rem;
+}

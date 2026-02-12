@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    background-color: #e7f3f2;
+    margin-top: 6%;
+}
+
+form {
+    border: 5px solid rgb(91, 91, 91);
+    border-radius: 3%;
+    padding: 5rem 3rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1rem 1.5rem 1rem 1rem #abbdbc;
+}
+
+h1 {
+    margin: -3rem 10% 5rem 10%;
+}
+
+#nameInput, #emailInput,  #ageInput{
+    height: 2rem;
+    width: 15rem;
+    margin: .5rem;
+}
+
+#submitBtn {
+    margin-top: 2rem;
+    height: 3rem;
+    width: 90%;
+    border-radius: .2rem;
+}
