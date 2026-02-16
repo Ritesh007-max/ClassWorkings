@@ -1,59 +1,90 @@
 const express = require("express");
+
 const app = express();
+
 app.use(express.json());
 
 const users = [
   { id: 1, name: "Arjun", role: "student" },
-  { id: 2, name: "Priyesha", role: "mentor" },
-  { id: 3, name: "Ritesh", role: "mentor" },
-  { id: 4, name: "Gabale", role: "mentor" }
+  { id: 2, name: "Priyesha", role: "mentor" }
 ];
 
 app.get("/", (req, res) => {
-    res.status(200).send("home page");
+  res.send("Express server is running");
 });
 
 app.get("/users", (req, res) => {
-    res.status(201).send(users);
-});
-
-app.post("/users", (req, res) => {
-    let newUser = {};
-    for(let i = 0; i < req.body.length; i++) {
-        newUser = {
-            id: req.body[i].id,
-            name: req.body[i].name,
-            role: req.body[i].role
-        };
-        console.log(newUser);
-        users.push(newUser);
-    }
-    res.status(201).send(users);
+  res.status(200).json(users);
 });
 
 app.get("/users/:id", (req, res) => {
-    res.status(201).send(users[req.params.id]);
+  const userId = Number(req.params.id);
+  const user = users.find(u => u.id === userId);
+
+  console.log(req.body);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  res.status(200).json(user);
 });
 
-app.get("/admin", (req, res) => {
-    res.status(202).json({
-        "name": "Admin",
-        "version": "1.0.0",
-        "description": "This is the admins Pannel Do not put/patch",
-        "main": "index.js",
-        "type": "commonjs",
-        "scripts": {
-            "test": "echo \"Error: no test specified\" && exit 1"
-        },
-        "author": "Ritesh R Gabale",
-        "license": "ISC",
-        "dependencies": {
-            "express": "^5.2.1",
-            "nodemon": "^3.1.11"
-        }
-    });
+app.get("/:route", (req, res) => {
+  res.status(200).json(users)
+})
+
+app.put("/users/:id", (req, res) => {
+  const userId = Number(req.params.id);
+  const index = users.findIndex(u => u.id === userId);
+
+  if (index === -1) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  users[index] = {
+    id: userId,
+    name: req.body.name,
+    role: req.body.role,
+    age: req.body.age
+  };
+
+  res.status(200).json({
+    message: "User updated",
+    user: users[index]
+  });
+});
+
+app.delete("/users/:name", (req, res) => {
+  const userName = String(req.params.name);
+  const index = users.findIndex(u => u.name === userName);
+
+  if (index === "") { 
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  users.splice(index, 1);
+
+  res.status(204).end();
+});
+
+app.patch("/users/:name", (req, res) => {
+  const userName = String(req.params.name);
+  const user = users.find(u => u.name === userName);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  if (req.body.name) user.name = req.body.name;
+  if (req.body.role) user.role = req.body.role;
+
+  res.status(200).json({
+    message: "User updated",
+    user
+  });
 });
 
 app.listen(3000, () => {
-    console.log("Server started on port 3000");
+  console.log("Server started on port 3000");
 });
