@@ -2,6 +2,12 @@ const express = require("express");
 
 const app = express();
 
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
+
 app.use(express.json());
 
 const users = [
@@ -58,6 +64,10 @@ app.get("/users/:uid", (req, res) => {
   }
 
   res.status(200).json(user);
+});
+
+app.get("/users", (req, res) => {
+  res.status(200).json(users);
 });
 
 app.post("/users", (req, res) => {
