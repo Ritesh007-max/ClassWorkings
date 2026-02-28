@@ -307,6 +307,360 @@ PUT /products/:id/price
   "price": 1299
 }
 ```
+# 🌍 States Management REST API
+
+A Node.js + Express REST API for managing Indian states data including:
+
+- Population
+- Literacy Rate
+- Annual Budget
+- GDP
+
+This API supports full CRUD operations along with specific attribute updates.
+
+---
+
+# 🚀 Base URL
+
+```
+http://localhost:3000
+```
+
+---
+
+# 📦 Data Structure
+
+Each state object contains:
+
+```json
+{
+  "id": 1,
+  "name": "Andhra Pradesh",
+  "population": 49386799,
+  "literacyRate": 67.02,
+  "annualBudget": 279279,
+  "gdp": 14000000
+}
+```
+
+# 📍 Endpoints Summary
+
+| Method | Endpoint | Description |
+|--------|----------|------------|
+| GET | /states | Get all states |
+| GET | /states/:id | Get state by ID |
+| GET | /highest-gdp | Get state with highest GDP |
+| POST | /states | Create new state |
+| PUT | /states/:id | Replace full state data |
+| PUT | /states/:id/budget | Update annual budget |
+| PUT | /states/:id/population | Update population |
+| PATCH | /states/:id/literacy | Update literacy rate |
+| PATCH | /states/:id/gdp | Update GDP |
+| PATCH | /states/:id | Partial update |
+| DELETE | /states/:id | Delete state by ID |
+| DELETE | /states/name/:stateName | Delete state by name |
+| DELETE | /states/low-literacy/:percentage | Count states below literacy rate |
+
+---
+
+# 🟢 GET Endpoints
+
+## 1️⃣ Get All States
+
+```
+GET /states
+```
+
+### Response (200 OK)
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Andhra Pradesh",
+    "population": 49386799,
+    "literacyRate": 67.02,
+    "annualBudget": 279279,
+    "gdp": 14000000
+  }
+]
+```
+
+---
+
+## 2️⃣ Get State By ID
+
+```
+GET /states/:id
+```
+
+### Example
+
+```
+GET /states/1
+```
+
+### Responses
+
+| Status Code | Description |
+|-------------|------------|
+| 200 | State found |
+| 404 | Invalid state id |
+
+---
+
+## 3️⃣ Get State with Highest GDP
+
+```
+GET /highest-gdp
+```
+
+### Response (200 OK)
+
+```json
+{
+  "id": 14,
+  "name": "Maharashtra",
+  "gdp": 35000000
+}
+```
+
+---
+
+# 🔵 POST Endpoint
+
+## 4️⃣ Create New State
+
+```
+POST /states
+```
+
+### Headers
+
+```
+Content-Type: application/json
+```
+
+### Request Body
+
+```json
+{
+  "name": "New State",
+  "population": 1000000,
+  "literacyRate": 75.5,
+  "annualBudget": 50000,
+  "gdp": 2000000
+}
+```
+
+### Response (200 OK)
+
+```json
+{
+  "name": "New State",
+  "population": 1000000,
+  "literacyRate": 75.5,
+  "annualBudget": 50000,
+  "gdp": 2000000
+}
+```
+
+---
+
+# 🟡 PUT Endpoints
+
+## 5️⃣ Replace Full State Data
+
+```
+PUT /states/:id
+```
+
+### Request Body
+
+```json
+{
+  "name": "Updated State",
+  "population": 1200000,
+  "literacyRate": 78.0,
+  "annualBudget": 60000,
+  "gdp": 3000000
+}
+```
+
+---
+
+## 6️⃣ Update Annual Budget
+
+```
+PUT /states/:id/budget
+```
+
+### Request Body
+
+```json
+{
+  "annualBudget": 70000
+}
+```
+
+---
+
+## 7️⃣ Update Population
+
+```
+PUT /states/:id/population
+```
+
+### Request Body
+
+```json
+{
+  "population": 1500000
+}
+```
+
+---
+
+# 🟣 PATCH Endpoints
+
+## 8️⃣ Update Literacy Rate
+
+```
+PATCH /states/:id/literacy
+```
+
+### Request Body
+
+```json
+{
+  "literacyRate": 85.5
+}
+```
+
+---
+
+## 9️⃣ Update GDP
+
+```
+PATCH /states/:id/gdp
+```
+
+### Request Body
+
+```json
+{
+  "gdp": 5000000
+}
+```
+
+---
+
+## 🔟 Partial Update (Multiple Fields)
+
+```
+PATCH /states/:id
+```
+
+### Request Body Example
+
+```json
+{
+  "population": 2000000,
+  "annualBudget": 80000
+}
+```
+
+---
+
+# 🔴 DELETE Endpoints
+
+## 1️⃣1️⃣ Delete State By ID
+
+```
+DELETE /states/:id
+```
+
+### Response
+
+- 204 No Content (State deleted)
+- 404 Not Found (If state does not exist)
+
+---
+
+## 1️⃣2️⃣ Delete State By Name
+
+```
+DELETE /states/name/:stateName
+```
+
+### Example
+
+```
+DELETE /states/name/Goa
+```
+
+---
+
+## 1️⃣3️⃣ Count States Below Literacy Rate
+
+```
+DELETE /states/low-literacy/:percentage
+```
+
+> ⚠️ This route does **NOT delete states**.  
+> It only returns how many states have literacy rate below the given percentage.
+
+### Example
+
+```
+DELETE /states/low-literacy/70
+```
+
+### Response
+
+```json
+{
+  "deletedCount": 5
+}
+```
+
+---
+
+# ⚙️ Setup Instructions
+
+```bash
+npm install
+node Ass3.js
+```
+
+Server runs on:
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🧠 Tech Stack
+
+- Node.js
+- Express.js
+- RESTful Architecture
+- JSON-based request handling
+
+---
+
+# 📌 Important Notes
+
+- Data is stored in-memory (not persistent).
+- Server restarts will reset the data.
+- All POST, PUT, and PATCH requests require:
+
+```
+Content-Type: application/json
+```
+
+- ID must be a valid numeric state ID.
 
 ---
 
