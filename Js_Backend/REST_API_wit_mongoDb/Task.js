@@ -58,24 +58,33 @@ app.put("/updateuser", async (req, res) => {
   try {
     const Updateuser = await User.findByIdAndUpdate(userId, req.body);
     res.json(Updateuser);
-  } 
-  catch (error) {
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+app.patch("/updateuser", async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const Updateuser = await User.findByIdAndUpdate(userId, req.body);
+    res.json(Updateuser);
+  } catch (error) {
     res.status(500).send(error);
   }
 });
 
 app.delete("/deleteuser", async (req, res) => {
-    const userId = req.params.id;
+  const userId = req.params.id;
 
-    try{
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
 
-        const users = await User.find({});
-        res.status(200).json(users)
-    }
-    catch (error) {
-        res.status(404).json(error);
-    }
+    const users = await User.find({});
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(404).json(error);
+  }
 });
 
 app.listen(3000, () => {
