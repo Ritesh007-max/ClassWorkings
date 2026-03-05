@@ -318,18 +318,38 @@ app.put("/states/:id/population", (req, res) => {
   res.status(200).json(state);
 });
 
+
+// /states/:id/literacy write patch route here 
 app.patch("/states/:id/literacy", (req, res) => {
   const stateId = parseInt(req.params.id);
-  const { literacyRate } = req.body;
+  const literacy = req.body;
+  const state = states.find(state => state.id == stateId);
+
+  if (!state) {
+    res.status(404).json({message: "state not found"});
+  }
+
+  state.literacyRate = literacy;
+  res.status(200).json(state);
+})
+
+app.patch("/states/:id/gdp/increment", (req, res) => {
+  const stateId = parseInt(req.params.id);
+  const percent  = parseInt(req.body.gdp);
+  console.log(percent);
   const state = states.find((s) => s.id === stateId);
 
   if (!state) {
     return res.status(404).json({ message: "State not found" });
   }
 
-  state.literacyRate = literacyRate;
+  const increment = (state.gdp * percent) / 100;
+  console.log(increment);
+  state.gdp += increment;
+
   res.status(200).json(state);
 });
+
 
 app.patch("/states/:id/gdp", (req, res) => {
   const stateId = parseInt(req.params.id);
