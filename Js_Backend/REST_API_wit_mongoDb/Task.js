@@ -4,14 +4,26 @@ const app = express();
 app.use(express.json());
 
 mongoose
-  .connect("mongodb://localhost:27017/Task")
+  .connect("mongodb://localhost:27017/TaskNew")
   .then(() => console.log("MongoDb Connected Successfully"))
   .catch((error) => console.log("MongoDb connection Failed", error));
 
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  age: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    lowercase: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minLength: 6,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
