@@ -39,16 +39,16 @@ app.post("/addusers", async (req, res) => {
   try {
     await User.insertMany(req.body);
     res.status(201).send(req.body);
-  } catch {
+  } catch (error) {
     res.status(500).send({ message: error.message });
   }
 });
 
 app.post("/adduser", async (req, res) => {
   try {
-    await User.insertOne(req.body);
-    res.status(201).send(req.body);
-  } catch {
+    const newUser = await User.create(req.body);
+    res.status(201).send(newUser);
+  } catch (error) {
     res.status(500).send({ message: error.message });
   }
 });
@@ -56,10 +56,10 @@ app.post("/adduser", async (req, res) => {
 app.put("/userupdate/:id", async (req, res) => {
   const userId = req.params.id;
   try {
-    const Updateuser = await User.findByIdAndUpdate(userId, req.body);
+    const Updateuser = await User.findByIdAndUpdate(userId, req.body, { new: true });
     res.json(Updateuser);
   } catch (error) {
-    res.status(500).send(err);
+    res.status(500).send({ message: error.message });
   }
 });
 

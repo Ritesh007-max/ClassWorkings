@@ -21,17 +21,17 @@ app.post("/addusers", async(req, res) => {
         await User.insertMany(req.body);
         res.status(201).send(req.body);
     }
-    catch{
+    catch(error){
         res.status(500).send({message: error.message});
     }
 });
 
 app.post("/adduser", async(req, res) => {
     try{
-        await User.insertOne(req.body);
-        res.status(201).send(req.body);
+        const newUser = await User.create(req.body);
+        res.status(201).send(newUser);
     }
-    catch{
+    catch(error){
         res.status(500).send({message: error.message});
     }
 });
