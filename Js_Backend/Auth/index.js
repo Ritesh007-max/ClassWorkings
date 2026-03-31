@@ -1,6 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = "mysecretkey123";
 
 const app = express();
 app.use(express.json());
@@ -54,39 +56,43 @@ app.post("/register", async (req, res) => {
         email: user.email,
       },
     });
-  } catch (error){
+  } catch (error) {
     res.status(500).send(error);
   }
 });
 
 // user login route
 
-app.post("/login", async(req, res) => {
-  
-    const {email, password} = req.body;
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
 
-    try {
-        
-    if(!email || !password) {
-        res.status(400).send('Something is missing');
+  try {
+    if (!email || !password) {
+      res.status(400).send("Something is missing");
     }
 
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({
         success: false,
         message: "No account found with this email",
-      })
+      });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password)
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
       return res.status(401).json({
         success: false,
         message: "Incorrect password",
-      })
+      });
     }
+
+    const token = jwt.sign(
+      { userId: user._id, name: user.name }, 
+      SECRET_KEY, 
+      {expiresIn: "1d"}
+    );
 
     res.status(200).json({
       success: true,
@@ -95,23 +101,23 @@ app.post("/login", async(req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        jwtToken: token
       },
-    })
-    }
-    catch (error) {
-        res.status(500).send("It's not you it's us");
-    }
-})
+    });
+  } catch (error) {
+    res.status(500).send("It's not you it's us");
+  }
+});
 
 app.get("/users", async (req, res) => {
   try {
-    const users = await User.find().select("-password")
-    res.status(200).json({ success: true, data: users })
+    const users = await User.find().select("-password");
+    res.status(200).json({ success: true, data: users });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message })
+    res.status(500).json({ success: false, message: error.message });
   }
-})
+});
 
 app.listen(3000, () => {
-  console.log(`Server running at http://localhost:3000`)
-})
+  console.log(`Server running at http://localhost:3000`);
+});
