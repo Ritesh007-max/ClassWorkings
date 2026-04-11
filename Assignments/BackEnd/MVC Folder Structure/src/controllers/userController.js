@@ -20,6 +20,15 @@ const createUser = async (req, res) => {
   }
 };
 
+const createMultipleUser = async (req, res) => {
+  try {
+    const users = await User.insertMany(req.body);
+    res.status(201).send(users);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -66,4 +75,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser };
+module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser, createMultipleUser };
