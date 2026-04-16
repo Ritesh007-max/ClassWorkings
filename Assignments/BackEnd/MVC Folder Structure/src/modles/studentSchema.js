@@ -9,22 +9,25 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim:     true,
     },
-    email: {
-      type:     String,
+    branch: {
+      type: String,
       required: true,
-      unique:   true,
-      trim:     true,
+      trim: true,
     },
-    age: {
-      type:   Number,
+    semester: {
+      type: Int16Array,
       required: true,
     },
+    CGPA: {
+      type: Float16Array,
+      required: true,
+    }
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model('User', userSchema);
+const Student = mongoose.model('Student', userSchema);
 
-module.exports = User;
+module.exports = Student;
