@@ -36,16 +36,15 @@ exports.createNote = async (req, res) => {
         const { title, content, category, isPinned } = req.body;
         
         if (!title || !content) {
-            return $es.status(400).json({ success: false, message: 'Title and content are required', data: null });
+            return res.status(400).json({ success: false, message: 'Title and content are required', data: null });
         }
 
         const note = await Note.create({ title, content, category, isPinned });
-        $es.status(201).json({ success: true, message: 'Note created successfully', data: note });
+        res.status(201).json({ success: true, message: 'Note created successfully', data: note });
     } catch (error) {
         if (error.name === 'ValidationError') {
-            return $es.status(400).json({ success: false, message: error.message, data: null });
+            return res.status(400).json({ success: false, message: error.message, data: null });
         }
-        $es.status(500).json({ success: false, message: 'Server Error', data: null });
+        res.status(500).json({ success: false, message: 'Server Error', data: null });
     }
 };
-
