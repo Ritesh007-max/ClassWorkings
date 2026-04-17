@@ -48,3 +48,21 @@ exports.createNote = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server Error', data: null });
     }
 };
+
+// POST /api/notes/bulk
+exports.createBulkNotes = async (req, res) => {
+    try {
+        const notesData = req.body;
+        if (!Array.isArray(notesData) || notesData.length === 0) {
+            return res.status(400).json({ success: false, message: 'Request body must be an array of notes', data: null });
+        }
+
+        const notes = await Note.insertMany(notesData);
+        res.status(201).json({ success: true, message: 'Bulk notes created successfully', data: notes });
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ success: false, message: error.message, data: null });
+        }
+        res.status(500).json({ success: false, message: 'Server Error', data: null });
+    }
+};
