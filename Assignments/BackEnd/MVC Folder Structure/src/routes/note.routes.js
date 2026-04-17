@@ -8,5 +8,6 @@ router.post('/bulk', noteController.createBulkNotes);
 router.get('/:id', noteController.getNoteById);
 router.post('/', noteController.createNote);
 router.put('/:id', noteController.replaceNote);
+router.patch('/:id', noteController.updateNotePartial);
 
 module.exports = router;
